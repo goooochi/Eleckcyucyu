@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 11838565}
-  - component: {fileID: 11838564}
+  - component: {fileID: 11838566}
   m_Layer: 0
   m_Name: InstantiateTemplateSystem
   m_TagString: Untagged
@@ -140,19 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &11838564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11838563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab7be82cf13c944138b82ee37adc092b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenshotImage: {fileID: 1068310962}
 --- !u!4 &11838565
 Transform:
   m_ObjectHideFlags: 0
@@ -168,6 +155,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11838566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11838563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7be82cf13c944138b82ee37adc092b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_after: {fileID: 1068310962}
+  CameraForTemplate: {fileID: 7672664137016856593, guid: bd9f2fc8e4d43492ea6501ff35908e97, type: 3}
 --- !u!1 &639245576
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +344,7 @@ GameObject:
   - component: {fileID: 723912427}
   - component: {fileID: 723912426}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: GetImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,9 +415,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11838564}
+      - m_Target: {fileID: 11838566}
         m_TargetAssemblyTypeName: InstantiateTemplatePicture, Assembly-CSharp
-        m_MethodName: ShowLatestScreenshot
+        m_MethodName: GetTemplateImage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -598,7 +599,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

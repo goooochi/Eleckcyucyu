@@ -14,12 +14,13 @@ public class InstantiateTemplatePicture : MonoBehaviour
 
     //第二段階
     [SerializeField] GameObject CameraForTemplate;
+    GameObject variableCamera;
 
 
     private void Awake()
     {
         //Templateのために必要となるカメラを生成
-        GameObject camera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
+        variableCamera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
             Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
 
 
@@ -32,7 +33,6 @@ public class InstantiateTemplatePicture : MonoBehaviour
 
         StartCoroutine(UpdateCurrentScreenShot());
 
-        Destroy(GetComponent<Camera>());
     }
 
     protected IEnumerator UpdateCurrentScreenShot()
@@ -61,5 +61,7 @@ public class InstantiateTemplatePicture : MonoBehaviour
 
         //UIへ変換
         image_after.sprite = Sprite.Create(texture_After, new Rect(0, 0, texture_After.width, texture_After.height), Vector2.zero);
+
+        Destroy(variableCamera);
     }
 }
