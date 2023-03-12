@@ -2,126 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine.UI;
+using System;
+using System.Text;
 
 public class InstantiateTemplatePicture : MonoBehaviour
 {
+    //第一段階
+    protected Texture2D currentScreenShotTexture;
+    public Image image_after;
 
-    //[SerializeField] GameObject Player;
+    //第二段階
+    [SerializeField] GameObject CameraForTemplate;
 
-    //public string folderPath = "Assets/2_Frank/Images";
 
-    ////[Header("保存先の設定")]
-    ////[SerializeField]
-    ////public static　string savePath = "Assets/2_Frank/Images/";
-
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-
-    //    GetTemplatePicture();
-    //}
-
-    //public int GetRandomNumber()
-    //{
-    //    throw new System.NotImplementedException();
-    //}
-
-    //public void GetTemplatePicture()
-    //{
-    //    GameObject gameObject = Instantiate(Player, new Vector3((float)Random.Range(-10, 10), 0f, (float)Random.Range(-10, 10)), Quaternion.Euler(-30, Random.Range(0, 360), 0)) as GameObject;
-
-    //    //生成されたオブジェクトの第一子供にアクセスする
-    //    gameObject.transform.GetChild(0).gameObject.SetActive(true);
-
-    //    //GameViewを切り取って、写真を保存する
-    //    CaptureScreenshot();
-    //}
-
-    ///// <summary>
-    ///// キャプチャを撮る
-    ///// </summary>
-    ///// <remarks>
-    ///// Edit > CaptureScreenshot に追加。
-    ///// HotKeyは Ctrl + Shift + F12。
-    ///// </remarks>
-    //private void CaptureScreenshot()
-    //{
-    //    string fileName = "Screenshot_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".png";
-    //    string path = Path.Combine(Application.dataPath, "2_Frank", "Images", fileName);
-    //    ScreenCapture.CaptureScreenshot(path);
-    //    Debug.Log("Screenshot saved at " + path);
-
-    //    Player.gameObject.SetActive(false);
-    //}
-
-    //public void GetFileName()
-    //{
-    //    string[] fileNames = Directory.GetFiles(folderPath);
-    //    foreach (string fileName in fileNames)
-    //    {
-    //        Debug.Log(Path.GetFileName(fileName));
-    //    }
-    //}
-
-    public Image screenshotImage;
-
-    private string screenshotPath;
-
-    void Start()
+    private void Awake()
     {
-        screenshotPath = Path.Combine(Application.persistentDataPath, "Screenshot.png");
+        //Templateのために必要となるカメラを生成
+        GameObject camera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
+            Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
+
+
     }
 
-    public void CaptureScreenshot()
+    protected void Start()
     {
-        StartCoroutine(TakeScreenshot());
+        // スクリーンショット用のTexture2D用意
+        currentScreenShotTexture = new Texture2D(Screen.width, Screen.height);
+
+        StartCoroutine(UpdateCurrentScreenShot());
+
+        Destroy(GetComponent<Camera>());
     }
 
-    private IEnumerator TakeScreenshot()
+    protected IEnumerator UpdateCurrentScreenShot()
     {
-        // Wait for end of frame to avoid capturing GUI overlay
+        // これがないとReadPixels()でエラーになる
         yield return new WaitForEndOfFrame();
 
-        // Take screenshot and save to file
-        ScreenCapture.CaptureScreenshot("Screenshot.png");
-        yield return new WaitForSeconds(1f); // Wait for Unity to process screenshot
-        byte[] data = File.ReadAllBytes(screenshotPath);
-
-        // Save screenshot to file
-        string path = Path.Combine(Application.persistentDataPath, "Screenshot.png");
-        File.WriteAllBytes(path, data);
-
-        // Refresh the asset database to immediately show the screenshot in the editor
-#if UNITY_EDITOR
-        AssetDatabase.Refresh();
-#endif
+        currentScreenShotTexture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        currentScreenShotTexture.Apply();
     }
 
-    public void ShowLatestScreenshot()
+    /// <summary>
+    /// 保存したデータを取得する
+    /// </summary>
+    public void GetTemplateImage()
     {
-        if (!File.Exists(screenshotPath))
-        {
-            Debug.LogError("Screenshot not found!");
-            return;
-        }
-        byte[] data = File.ReadAllBytes(screenshotPath);
+        byte[] imageBytes = currentScreenShotTexture.EncodeToPNG();
+        var encodedImage = Convert.ToBase64String(imageBytes);
+        Debug.Log(encodedImage);
 
-        Texture2D screenshotTexture = new Texture2D(2, 2);
-        screenshotTexture.LoadImage(data);
-        screenshotImage.sprite = Sprite.Create(screenshotTexture, new Rect(0, 0, screenshotTexture.width, screenshotTexture.height), Vector2.zero);
+        //base64からの変換
+        byte[] byte_After = System.Convert.FromBase64String(encodedImage);
+        //byteからTextureへの変換
+        Texture2D texture_After = new Texture2D(currentScreenShotTexture.width, currentScreenShotTexture.height, TextureFormat.RGBA32, false);
+        texture_After.LoadImage(byte_After);
+
+        //UIへ変換
+        image_after.sprite = Sprite.Create(texture_After, new Rect(0, 0, texture_After.width, texture_After.height), Vector2.zero);
     }
-
-}
-
-
-interface FunctionOfInstantiarte
-{
-    //ランダムな数字を返してくれるfunction
-    int GetRandomNumber();
-
-    void GetTemplatePicture();
 }
