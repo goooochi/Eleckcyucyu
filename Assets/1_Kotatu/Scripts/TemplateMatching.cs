@@ -7,8 +7,8 @@ using System.IO;
 
 public class TemplateMatching : MonoBehaviour
 {
-    public Image searchImage;
     public Image templateImage;
+    public Image searchImage;
     //public Button matchButton;
     public float threshold = 0.9f;
 
@@ -134,6 +134,12 @@ public class TemplateMatching : MonoBehaviour
         return sum / (templateWidth * templateHeight * 3);
     }
 
+    public void OnClick()
+    {
+        // 類似度を計算する
+        MatchTemplate();
+        Debug.Log("類似度を計算する");
+    }
 }
 
 
