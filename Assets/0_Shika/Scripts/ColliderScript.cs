@@ -22,7 +22,10 @@ public class ColliderScript : MonoBehaviour
         {
             foreach (Transform grandChildTransform in childTransform)
             {
-                grandChildTransform.gameObject.AddComponent<BoxCollider>();
+                if(grandChildTransform.gameObject.transform.position.y < 70)
+                {
+                    grandChildTransform.gameObject.AddComponent<BoxCollider>();
+                }                   
             }
         }
     }
