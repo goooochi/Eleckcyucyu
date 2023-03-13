@@ -106,9 +106,14 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
+        public ThirdPersonController thirdPersonController;
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+
+        private bool mapCheck = false;
+        public GameObject PlayerLocation;
 
         private bool IsCurrentDeviceMouse
         {
@@ -150,6 +155,7 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            PlayerLocation.SetActive(false);
         }
 
         private void Update()
@@ -158,7 +164,23 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
+            //Move();
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                mapCheck = !mapCheck;
+            }
+
+            if (mapCheck == false)
+            {
+                Move();
+                PlayerLocation.SetActive(false);
+            }
+            else
+            {
+                PlayerLocation.SetActive(true);
+            }
+
         }
 
         private void LateUpdate()
