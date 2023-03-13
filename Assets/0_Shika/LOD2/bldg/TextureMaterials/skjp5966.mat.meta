@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 404864af759254e3fa8c8f518bb2f162
+=======
+guid: c295b7e3f7efa4711a38a00e7d3cb220
+>>>>>>> develop
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

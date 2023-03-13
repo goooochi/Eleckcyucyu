@@ -9,6 +9,7 @@ public class FindTest : MonoBehaviour
 {
     //[MenuItem("MyGame/Find")]
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Texture ObjectTexture;
     public Material TargetMaterial;
     
@@ -17,6 +18,8 @@ public class FindTest : MonoBehaviour
         
     }
 
+=======
+>>>>>>> develop
 =======
 >>>>>>> develop
     void Start()

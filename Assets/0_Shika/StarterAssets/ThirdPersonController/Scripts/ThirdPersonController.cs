@@ -107,6 +107,11 @@ namespace StarterAssets
         private GameObject _mainCamera;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        public ThirdPersonController thirdPersonController;
+
+>>>>>>> develop
 =======
         public ThirdPersonController thirdPersonController;
 
@@ -116,6 +121,12 @@ namespace StarterAssets
         private bool _hasAnimator;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        private bool mapCheck = false;
+        public GameObject PlayerLocation;
+
+>>>>>>> develop
 =======
         private bool mapCheck = false;
         public GameObject PlayerLocation;
@@ -162,6 +173,10 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            PlayerLocation.SetActive(false);
+>>>>>>> develop
 =======
             PlayerLocation.SetActive(false);
 >>>>>>> develop
@@ -174,8 +189,11 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
 <<<<<<< HEAD
+<<<<<<< HEAD
             Move();
 =======
+=======
+>>>>>>> develop
             //Move();
 
             if (Input.GetKeyDown(KeyCode.M))
@@ -193,6 +211,9 @@ namespace StarterAssets
                 PlayerLocation.SetActive(true);
             }
 
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
         }
 
