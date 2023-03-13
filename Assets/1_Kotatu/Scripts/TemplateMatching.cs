@@ -85,6 +85,7 @@ public class TemplateMatching : MonoBehaviour
         Color32[] templatePixels = templateTex.GetPixels32();
         Color32[,] searchArray = new Color32[searchHeight, searchWidth];
         Color32[,] templateArray = new Color32[templateHeight, templateWidth];
+
         for (int y = 0; y < searchHeight; y++)
         {
             for (int x = 0; x < searchWidth; x++)
