@@ -8,14 +8,6 @@ using UnityEditor;
 public class FindTest : MonoBehaviour
 {
     //[MenuItem("MyGame/Find")]
-    public Texture ObjectTexture;
-    public Material TargetMaterial;
-    
-    private void Awake()
-    {
-        
-    }
-
     void Start()
     {
         //TargetMaterial.SetTexture("_MainTex", ObjectTexture);
