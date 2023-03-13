@@ -35,14 +35,14 @@ public class FindTest : MonoBehaviour
     {
         List<Material> mlist = new List<Material>();
         List<Texture2D> tlist = new List<Texture2D>();
-        List<Texture2D> outlist = new List<Texture2D>();
+        //List<Texture2D> outlist = new List<Texture2D>();
 
 
         //選択したフォルダの取得
         Object[] selectedAsset = Selection.GetFiltered(typeof(Object), SelectionMode.Assets);
         foreach (var sel in selectedAsset)
         {
-            Debug.Log(sel.name + " : " + sel.GetType());
+            //Debug.Log(sel.name + " : " + sel.GetType());
             //選択したものがフォルダなら、フォルダ内にあるマテリアルとテクスチャを検索してリストに追加
             if ((sel.GetType().ToString() == "UnityEditor.DefaultAsset"))
             {
@@ -70,21 +70,29 @@ public class FindTest : MonoBehaviour
                     foreach (var tfa in tfasset)
                     {
                         tlist.Add((Texture2D)tfa);
-                        Debug.Log(tfa);
+                        //Debug.Log(tfa);
                     }
                 }
             }
         }
+
+        //Debug.Log("mlist : " + string.Join(",", mlist));
+        //Debug.Log("tlist : " + string.Join(",", tlist));
+        Debug.Log("mlist : " + mlist.Count);
+        Debug.Log("tlist : " + tlist.Count);
+
         //マテリアルリストをfor文で回して名前の種類によって処理を分ける
-        foreach (var tex in tlist)
+        //foreach (var mat in mlist)
+        //{
+        //    foreach (var tex in tlist)
+        //    {
+        //        mat.SetTexture("_MainTex", null);
+        //    }
+        //}
+
+        for (int i = 0; i < mlist.Count; i++)
         {
-            if (tex.name.Contains(" "))
-            {
-                foreach (var mat in mlist)
-                {
-                    mat.SetTexture("_MainTex", tex);
-                }
-            }
+            mlist[i].SetTexture("_MainTex", tlist[i]);
         }
     }
 }
