@@ -1016,9 +1016,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 885629733}
-        m_TargetAssemblyTypeName: InstantiateTemplatePicture, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 885629734}
+        m_TargetAssemblyTypeName: TweetTest, Assembly-CSharp
+        m_MethodName: Tweet
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
