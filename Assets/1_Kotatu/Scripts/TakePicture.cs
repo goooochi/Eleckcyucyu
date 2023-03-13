@@ -6,10 +6,10 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 
-public class InstantiateTemplatePicture : MonoBehaviour
+public class TakePicture : MonoBehaviour
 {
     //第一段階
-    protected Texture2D currentScreenShotTexture;
+     public Texture2D currentScreenShotTexture;
     public Image image_after;
 
     //第二段階
@@ -21,7 +21,7 @@ public class InstantiateTemplatePicture : MonoBehaviour
     {
         //Templateのために必要となるカメラを生成
         variableCamera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
-            Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
+        Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
 
 
     }
@@ -30,7 +30,7 @@ public class InstantiateTemplatePicture : MonoBehaviour
     {
         // スクリーンショット用のTexture2D用意
         currentScreenShotTexture = new Texture2D(Screen.width, Screen.height);
-        Debug.Log("hey");
+        Debug.Log("スクリーンショット用のTexture2D用意");
     }
 
     protected IEnumerator UpdateCurrentScreenShot()
@@ -70,7 +70,8 @@ public class InstantiateTemplatePicture : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("onClick");
+        // スクリーンショットを撮る
         StartCoroutine(UpdateCurrentScreenShot());
+        Debug.Log("スクリーンショットを撮る");
     }
 }
