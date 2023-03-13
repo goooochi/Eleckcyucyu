@@ -30,9 +30,7 @@ public class InstantiateTemplatePicture : MonoBehaviour
     {
         // スクリーンショット用のTexture2D用意
         currentScreenShotTexture = new Texture2D(Screen.width, Screen.height);
-
-        StartCoroutine(UpdateCurrentScreenShot());
-
+        Debug.Log("hey");
     }
 
     protected IEnumerator UpdateCurrentScreenShot()
@@ -63,5 +61,16 @@ public class InstantiateTemplatePicture : MonoBehaviour
         image_after.sprite = Sprite.Create(texture_After, new Rect(0, 0, texture_After.width, texture_After.height), Vector2.zero);
 
         Destroy(variableCamera);
+    }
+
+    //public void ScreenShot()
+    //{
+    //    StartCoroutine(UpdateCurrentScreenShot());
+    //}
+
+    public void OnClick()
+    {
+        Debug.Log("onClick");
+        StartCoroutine(UpdateCurrentScreenShot());
     }
 }

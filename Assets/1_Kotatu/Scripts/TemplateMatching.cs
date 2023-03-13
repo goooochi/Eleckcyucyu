@@ -5,7 +5,7 @@ using UnityEngine.UI;
 //using UnityEngine.Text;
 using System.IO;
 
-public class TestMatching : MonoBehaviour
+public class TemplateMatching : MonoBehaviour
 {
     public Image searchImage;
     public Image templateImage;
