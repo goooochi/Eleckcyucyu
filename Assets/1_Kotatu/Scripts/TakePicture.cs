@@ -9,21 +9,25 @@ using System.Text;
 public class TakePicture : MonoBehaviour
 {
     //第一段階
-     public Texture2D currentScreenShotTexture;
-    public Image image_after;
+    public Texture2D currentScreenShotTexture;
+    public Image image_template;
+    public Image image_target;
+    public Image Thema_Image;
 
     //第二段階
     [SerializeField] GameObject CameraForTemplate;
     GameObject variableCamera;
 
+    TimeManager timeManager;
+    List<Sprite> imageList;
 
     private void Awake()
     {
         //Templateのために必要となるカメラを生成
         variableCamera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
         Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
-
-
+        Thema_Image.enabled = false;
+        image_template.enabled = false;
     }
 
     protected void Start()
@@ -31,6 +35,8 @@ public class TakePicture : MonoBehaviour
         // スクリーンショット用のTexture2D用意
         currentScreenShotTexture = new Texture2D(Screen.width, Screen.height);
         Debug.Log("スクリーンショット用のTexture2D用意");
+        imageList = new List<Sprite>();
+        OnClick();
     }
 
     protected IEnumerator UpdateCurrentScreenShot()
@@ -40,12 +46,13 @@ public class TakePicture : MonoBehaviour
 
         currentScreenShotTexture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         currentScreenShotTexture.Apply();
+        Invoke("GetImage", 1.0f);
     }
 
     /// <summary>
     /// 保存したデータを取得する
     /// </summary>
-    public void GetTemplateImage()
+    public void GetImage()
     {
         byte[] imageBytes = currentScreenShotTexture.EncodeToPNG();
         var encodedImage = Convert.ToBase64String(imageBytes);
@@ -58,7 +65,16 @@ public class TakePicture : MonoBehaviour
         texture_After.LoadImage(byte_After);
 
         //UIへ変換
-        image_after.sprite = Sprite.Create(texture_After, new Rect(0, 0, texture_After.width, texture_After.height), Vector2.zero);
+        imageList.Add(Sprite.Create(texture_After, new Rect(0, 0, texture_After.width, texture_After.height), Vector2.zero));
+
+        Thema_Image.enabled = true;
+        image_template.enabled = true;
+        image_template.sprite = imageList[0];
+
+        if (imageList.Count > 1)
+        {
+            image_target.sprite = imageList[1];
+        }
 
         Destroy(variableCamera);
     }
@@ -73,5 +89,13 @@ public class TakePicture : MonoBehaviour
         // スクリーンショットを撮る
         StartCoroutine(UpdateCurrentScreenShot());
         Debug.Log("スクリーンショットを撮る");
+        //TimeManager.instance.isPicture = false;
+    }
+
+    public void GameStart()
+    {
+        Debug.Log("GameStart");
+        Thema_Image.enabled = false;
+        image_template.enabled = false;
     }
 }

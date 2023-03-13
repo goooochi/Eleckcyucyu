@@ -6,21 +6,50 @@ using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
-    public static float CountDownTime;
-    public Text TextCountDown;
+    public Text CountTimeText;
     
-    public float countTime = 5.0f;
+    public float countTime;
+    public bool isPicture;
+
+    public static TimeManager instance;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        CountDownTime = 30.0f;
+        countTime = 0f;
+        isPicture = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        TextCountDown.text = String.Format("{0:00}", CountDownTime);
-        CountDownTime -= Time.deltaTime;
+        CountManager();
+    }
+
+    void CountManager()
+    {
+        if (isPicture)
+        {
+            CountTimeText.text = String.Format("{0:00}", countTime);
+            countTime += Time.deltaTime;
+        }
+        else
+        {
+            countTime = 0f;
+        }
+    }
+
+    public void ChangePictureBool()
+    {
+        isPicture = false;
+        Debug.Log(isPicture);
     }
 }
