@@ -8,11 +8,15 @@ using System.Text;
 
 public class TakePicture : MonoBehaviour
 {
+    public GameObject PlayerCharacterModel;
     //第一段階
     public Texture2D currentScreenShotTexture;
     public Image image_template;
+    public Image template_Thema_Image;
+
     public Image image_target;
-    public Image Thema_Image;
+    //public Image takePictureButton;
+    //public Image target_Thema_Image;
 
     //第二段階
     [SerializeField] GameObject CameraForTemplate;
@@ -26,8 +30,12 @@ public class TakePicture : MonoBehaviour
         //Templateのために必要となるカメラを生成
         variableCamera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
         Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
-        Thema_Image.enabled = false;
+        template_Thema_Image.enabled = false;
         image_template.enabled = false;
+
+        //target_Thema_Image.enabled = false;
+        //takePictureButton.enabled = false;
+        image_target.enabled = false;
     }
 
     protected void Start()
@@ -67,13 +75,16 @@ public class TakePicture : MonoBehaviour
         //UIへ変換
         imageList.Add(Sprite.Create(texture_After, new Rect(0, 0, texture_After.width, texture_After.height), Vector2.zero));
 
-        Thema_Image.enabled = true;
-        image_template.enabled = true;
-        image_template.sprite = imageList[0];
-
         if (imageList.Count > 1)
         {
             image_target.sprite = imageList[1];
+            image_target.enabled = true;
+        }
+        else
+        {
+            template_Thema_Image.enabled = true;
+            image_template.enabled = true;
+            image_template.sprite = imageList[0];
         }
 
         Destroy(variableCamera);
@@ -95,7 +106,22 @@ public class TakePicture : MonoBehaviour
     public void GameStart()
     {
         Debug.Log("GameStart");
-        Thema_Image.enabled = false;
+        template_Thema_Image.enabled = false;
         image_template.enabled = false;
+    }
+
+    public void PictureModeUIAwake()
+    {
+        //target_Thema_Image.enabled = !target_Thema_Image.enabled;
+        //takePictureButton.enabled = !takePictureButton.enabled;
+        PlayerCharacterModel.SetActive(false);
+        //image_target.enabled = true;
+    }
+    public void PictureModeUISleep()
+    {
+        //target_Thema_Image.enabled = !target_Thema_Image.enabled;
+        //takePictureButton.enabled = !takePictureButton.enabled;
+        PlayerCharacterModel.SetActive(true);
+        //image_target.enabled = false;
     }
 }
