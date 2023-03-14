@@ -9,6 +9,7 @@ public class CameraModeScript : MonoBehaviour
     public GameObject pictureCamera;
     public GameObject Player;
     public TakePicture takePicture;
+    public TimeManager timeManager;
 
     //public GameObject canvas;
     private bool mapMode;
@@ -38,21 +39,29 @@ public class CameraModeScript : MonoBehaviour
         if (pictureMode)
         {
             mapMode = false;
-            pictureModeCameraSettings();
-            //takePicture.PictureModeUIAwake();
+            //pictureModeCameraSettings();
 
             if (Input.GetKeyDown(KeyCode.X))
             {
                 takePicture.OnClick();
+                timeManager.ChangePictureBool();
+
+                mapMode = !mapMode;
+                mainCamera.SetActive(!mainCamera.activeSelf);
+                mapCamera.SetActive(!mapCamera.activeSelf);
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                pictureModeCameraSettings();
             }
         }
         else
         {
             MapModeCameraChange();
-            //takePicture.PictureModeUISleep();
         }
-            
-        //Debug.Log("Map:" + mapMode + ",pic :" + pictureMode);
     }
 
     void MapModeCameraChange()
@@ -64,7 +73,7 @@ public class CameraModeScript : MonoBehaviour
             mapMode = !mapMode;
             mainCamera.SetActive(!mainCamera.activeSelf);
             mapCamera.SetActive(!mapCamera.activeSelf);
-            
+            takePicture.PictureModeUIChange();
         }
     }
 
@@ -75,7 +84,8 @@ public class CameraModeScript : MonoBehaviour
             // 各カメラオブジェクトの有効フラグを逆転(true→false,false→true)させる                     
             pictureMode = !pictureMode;
             mainCamera.SetActive(!mainCamera.activeSelf);
-            pictureCamera.SetActive(!pictureCamera.activeSelf);           
+            pictureCamera.SetActive(!pictureCamera.activeSelf);
+            takePicture.PictureModeUIChange();
         }
     }
 

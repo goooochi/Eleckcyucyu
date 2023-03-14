@@ -8,7 +8,11 @@ using System.Text;
 
 public class TakePicture : MonoBehaviour
 {
-    public GameObject PlayerCharacterModel;
+    //public GameObject PlayerCharacterModel;
+    public Image image_Camera_Icon;
+    public Image image_Map_Icon;
+    public Image target_BackgroundImage;
+    public Button MatchingCheckButton;
     //第一段階
     public Texture2D currentScreenShotTexture;
     public Image image_template;
@@ -17,12 +21,13 @@ public class TakePicture : MonoBehaviour
     public Image image_target;
     //public Image takePictureButton;
     //public Image target_Thema_Image;
+    public Image image_takeaPictureImage;
 
     //第二段階
     [SerializeField] GameObject CameraForTemplate;
     GameObject variableCamera;
 
-    TimeManager timeManager;
+    public TimeManager timeManager;
     List<Sprite> imageList;
 
     private void Awake()
@@ -30,12 +35,7 @@ public class TakePicture : MonoBehaviour
         //Templateのために必要となるカメラを生成
         variableCamera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
         Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
-        template_Thema_Image.enabled = false;
-        image_template.enabled = false;
-
-        //target_Thema_Image.enabled = false;
-        //takePictureButton.enabled = false;
-        image_target.enabled = false;
+        SpriteInit();
     }
 
     protected void Start()
@@ -77,8 +77,7 @@ public class TakePicture : MonoBehaviour
 
         if (imageList.Count > 1)
         {
-            image_target.sprite = imageList[1];
-            image_target.enabled = true;
+            TakenPictureCheck();
         }
         else
         {
@@ -97,10 +96,14 @@ public class TakePicture : MonoBehaviour
 
     public void OnClick()
     {
+        if (image_takeaPictureImage.enabled)
+        {
+            image_takeaPictureImage.enabled = false;
+        }
         // スクリーンショットを撮る
         StartCoroutine(UpdateCurrentScreenShot());
         Debug.Log("スクリーンショットを撮る");
-        //TimeManager.instance.isPicture = false;
+        //TimeManager.instance.isPicture = false;       
     }
 
     public void GameStart()
@@ -108,20 +111,38 @@ public class TakePicture : MonoBehaviour
         Debug.Log("GameStart");
         template_Thema_Image.enabled = false;
         image_template.enabled = false;
+        image_Camera_Icon.gameObject.SetActive(true);
+        image_Map_Icon.gameObject.SetActive(true);
+        timeManager.isPicture = true;
     }
 
-    public void PictureModeUIAwake()
+    public void PictureModeUIChange()
     {
-        //target_Thema_Image.enabled = !target_Thema_Image.enabled;
-        //takePictureButton.enabled = !takePictureButton.enabled;
-        PlayerCharacterModel.SetActive(false);
-        //image_target.enabled = true;
+        image_Camera_Icon.enabled = !image_Camera_Icon.enabled;
+        image_Map_Icon.enabled = !image_Map_Icon.enabled;
+        image_takeaPictureImage.enabled = true;
+
+        image_takeaPictureImage.enabled = !image_takeaPictureImage.enabled;
     }
-    public void PictureModeUISleep()
+
+    public void SpriteInit()
     {
-        //target_Thema_Image.enabled = !target_Thema_Image.enabled;
-        //takePictureButton.enabled = !takePictureButton.enabled;
-        PlayerCharacterModel.SetActive(true);
-        //image_target.enabled = false;
+        template_Thema_Image.enabled = false;
+        image_template.enabled = false;
+        image_target.enabled = false;
+        image_Camera_Icon.gameObject.SetActive(false);
+        image_Map_Icon.gameObject.SetActive(false);
+        target_BackgroundImage.enabled = false;
+        MatchingCheckButton.gameObject.SetActive(false);
+        image_takeaPictureImage.enabled = false;
+    }
+
+    public void TakenPictureCheck()
+    {
+        //image_takeaPictureImage.enabled = false;
+        target_BackgroundImage.enabled = true;
+        image_target.sprite = imageList[1];
+        image_target.enabled = true;
+        MatchingCheckButton.gameObject.SetActive(true);
     }
 }

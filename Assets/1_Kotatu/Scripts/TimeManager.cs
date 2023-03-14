@@ -25,7 +25,6 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         countTime = 0f;
-        isPicture = true;
     }
 
     // Update is called once per frame
