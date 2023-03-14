@@ -21,21 +21,21 @@ public class SceneController : MonoBehaviour
     public void MoveToMain()
     {
         // メインシーンへ
-        //SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Shika_LOD2");
         Debug.Log("MoveToMain");
     }
 
     public void MoveToResult()
     {
         // リザルトシーンへ
-        //SceneManager.LoadScene("Result");
+        SceneManager.LoadScene("Result");
         Debug.Log("MoveToResult");
     }
 
     public void MoveToTitle()
     {
         // タイトルシーンへ
-        //SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Title");
         Debug.Log("MoveToTitle");
     }
 }

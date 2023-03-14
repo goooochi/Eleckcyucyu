@@ -12,8 +12,12 @@ public class TemplateMatching : MonoBehaviour
     //public Button matchButton;
     public float threshold = 0.9f;
 
+    public float similarity;
+
     private Texture2D searchTexture;
     private Texture2D templateTexture;
+
+    public SceneController sceneController;
 
     private void Awake()
     {
@@ -59,7 +63,7 @@ public class TemplateMatching : MonoBehaviour
         Debug.Log(templateTexture);
 
         // テンプレートマッチングを実行
-        float similarity = PerformTemplateMatching(searchTexture, templateTexture);
+        similarity = PerformTemplateMatching(searchTexture, templateTexture);
 
         // 類似度をログに出力
         Debug.Log("Similarity: " + similarity);
@@ -70,6 +74,7 @@ public class TemplateMatching : MonoBehaviour
             Debug.Log("Success!");
         }
 
+        //sceneController.MoveToResult();
     }
 
     float PerformTemplateMatching(Texture2D searchTex, Texture2D templateTex)
@@ -135,7 +140,7 @@ public class TemplateMatching : MonoBehaviour
         return sum / (templateWidth * templateHeight * 3);
     }
 
-    public void OnClick()
+    public void CulculateMatchRate()
     {
         // 類似度を計算する
         MatchTemplate();

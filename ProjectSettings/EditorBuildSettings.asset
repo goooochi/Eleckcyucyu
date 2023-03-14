@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: da8c3c074a0494e76b3d199cbe760368
+  - enabled: 1
+    path: Assets/0_Shika/Scenes/Shika_LOD2.unity
+    guid: 5f8146b67c9064e97afc571710662cfc
   m_configObjects: {}
