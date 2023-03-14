@@ -57,7 +57,7 @@ public class RankingSystem : MonoBehaviour
         RankingGetFase.SetActive(true);
 
         //scoreを送信
-        SubmitScore(800);
+        SubmitScore(ScoreManager.score);
         SetUserName(userName.text);
         RequestLeaderBoard();
 
