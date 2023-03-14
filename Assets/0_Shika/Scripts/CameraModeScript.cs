@@ -73,7 +73,7 @@ public class CameraModeScript : MonoBehaviour
             mapMode = !mapMode;
             mainCamera.SetActive(!mainCamera.activeSelf);
             mapCamera.SetActive(!mapCamera.activeSelf);
-            takePicture.PictureModeUIChange();
+            takePicture.MapModeUIChange();
         }
     }
 

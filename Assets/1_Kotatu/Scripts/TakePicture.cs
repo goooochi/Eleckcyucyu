@@ -120,9 +120,13 @@ public class TakePicture : MonoBehaviour
     {
         image_Camera_Icon.enabled = !image_Camera_Icon.enabled;
         image_Map_Icon.enabled = !image_Map_Icon.enabled;
-        image_takeaPictureImage.enabled = true;
-
-        image_takeaPictureImage.enabled = true;
+        image_takeaPictureImage.enabled = !image_takeaPictureImage.enabled;
+        Debug.Log(image_takeaPictureImage.enabled);
+    }
+    public void MapModeUIChange()
+    {
+        image_Camera_Icon.enabled = !image_Camera_Icon.enabled;
+        image_Map_Icon.enabled = !image_Map_Icon.enabled;
     }
 
     public void SpriteInit()
