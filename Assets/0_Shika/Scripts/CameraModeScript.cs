@@ -33,7 +33,11 @@ public class CameraModeScript : MonoBehaviour
         }
         else
         {
-            PictureModeCameraChange();
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                // 各カメラオブジェクトの有効フラグを逆転(true→false,false→true)させる                     
+                PictureModeCameraChange();
+            }           
         }
 
         if (pictureMode)
@@ -43,16 +47,7 @@ public class CameraModeScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.X))
             {
-                takePicture.OnClick();
-
-                timeManager.ChangePictureBool();
-
-                mapMode = !mapMode;
-                mainCamera.SetActive(!mainCamera.activeSelf);
-                mapCamera.SetActive(!mapCamera.activeSelf);
-
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                takePictureCameraSettings();
             }
             else
             {
@@ -61,33 +56,37 @@ public class CameraModeScript : MonoBehaviour
         }
         else
         {
-            MapModeCameraChange();
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                // 各カメラオブジェクトの有効フラグを逆転(true→false,false→true)させる
+
+                MapModeCameraChange();
+            }
+        }
+
+        if (mapMode == false && pictureMode == false)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                takePicture.referenceTemplateChanger();
+            }
         }
     }
 
     void MapModeCameraChange()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            // 各カメラオブジェクトの有効フラグを逆転(true→false,false→true)させる
-            
-            mapMode = !mapMode;
-            mainCamera.SetActive(!mainCamera.activeSelf);
-            mapCamera.SetActive(!mapCamera.activeSelf);
-            takePicture.MapModeUIChange();
-        }
+        mapMode = !mapMode;
+        mainCamera.SetActive(!mainCamera.activeSelf);
+        mapCamera.SetActive(!mapCamera.activeSelf);
+        takePicture.MapModeUIChange();
     }
 
     void PictureModeCameraChange()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            // 各カメラオブジェクトの有効フラグを逆転(true→false,false→true)させる                     
-            pictureMode = !pictureMode;
-            mainCamera.SetActive(!mainCamera.activeSelf);
-            pictureCamera.SetActive(!pictureCamera.activeSelf);
-            takePicture.PictureModeUIChange();
-        }
+        pictureMode = !pictureMode;
+        mainCamera.SetActive(!mainCamera.activeSelf);
+        pictureCamera.SetActive(!pictureCamera.activeSelf);
+        takePicture.PictureModeUIChange();
     }
 
     void pictureModeCameraSettings()
@@ -108,5 +107,19 @@ public class CameraModeScript : MonoBehaviour
         //    Cursor.visible = true;
         //    Cursor.lockState = CursorLockMode.None;
         //}
+    }
+
+    void takePictureCameraSettings()
+    {
+        takePicture.OnClick();
+
+        timeManager.ChangePictureBool();
+
+        mapMode = !mapMode;
+        mainCamera.SetActive(!mainCamera.activeSelf);
+        mapCamera.SetActive(!mapCamera.activeSelf);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

@@ -16,7 +16,8 @@ public class TakePicture : MonoBehaviour
     //第一段階
     public Texture2D currentScreenShotTexture;
     public Image image_template;
-    public Image template_Thema_Image;
+    public Image template_Theme_Image;
+    public Image template_Theme_Reference_Image;
 
     public Image image_target;
     //public Image takePictureButton;
@@ -30,10 +31,12 @@ public class TakePicture : MonoBehaviour
     public TimeManager timeManager;
     List<Sprite> imageList;
 
+    public List<Transform> InstantiatePositions;
+
     private void Awake()
     {
         //Templateのために必要となるカメラを生成
-        variableCamera = Instantiate(CameraForTemplate, new Vector3(UnityEngine.Random.RandomRange(-10, 10), 0, UnityEngine.Random.RandomRange(-10, 10)),
+        variableCamera = Instantiate(CameraForTemplate, InstantiatePositions[UnityEngine.Random.Range(0, InstantiatePositions.Count)].position,
         Quaternion.Euler(-30, UnityEngine.Random.RandomRange(0, 360), 0)) as GameObject;
         SpriteInit();
     }
@@ -81,7 +84,7 @@ public class TakePicture : MonoBehaviour
         }
         else
         {
-            template_Thema_Image.enabled = true;
+            template_Theme_Image.enabled = true;
             image_template.enabled = true;
             image_template.sprite = imageList[0];
         }
@@ -109,7 +112,7 @@ public class TakePicture : MonoBehaviour
     public void GameStart()
     {
         Debug.Log("GameStart");
-        template_Thema_Image.enabled = false;
+        template_Theme_Image.enabled = false;
         image_template.enabled = false;
         image_Camera_Icon.gameObject.SetActive(true);
         image_Map_Icon.gameObject.SetActive(true);
@@ -131,7 +134,7 @@ public class TakePicture : MonoBehaviour
 
     public void SpriteInit()
     {
-        template_Thema_Image.enabled = false;
+        template_Theme_Image.enabled = false;
         image_template.enabled = false;
         image_target.enabled = false;
         image_Camera_Icon.gameObject.SetActive(false);
@@ -139,6 +142,7 @@ public class TakePicture : MonoBehaviour
         target_BackgroundImage.enabled = false;
         MatchingCheckButton.gameObject.SetActive(false);
         image_takeaPictureImage.enabled = false;
+        template_Theme_Reference_Image.enabled = false;
     }
 
     public void TakenPictureCheck()
@@ -148,5 +152,11 @@ public class TakePicture : MonoBehaviour
         image_target.sprite = imageList[1];
         image_target.enabled = true;
         MatchingCheckButton.gameObject.SetActive(true);
+    }
+
+    public void referenceTemplateChanger()
+    {
+        image_template.enabled = !image_template.enabled;
+        template_Theme_Reference_Image.enabled = !template_Theme_Reference_Image.enabled;
     }
 }

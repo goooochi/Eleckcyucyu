@@ -6,6 +6,7 @@ using UnityEditor;
 
 public class ColliderScript : MonoBehaviour
 {
+    //public Object[] bldgs;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class ColliderScript : MonoBehaviour
 
     void ColliderAssign()
     {
-        foreach (Transform childTransform in this.gameObject.transform)
+        foreach (Transform childTransform in gameObject.transform)
         {
             foreach (Transform grandChildTransform in childTransform)
             {
@@ -29,18 +30,18 @@ public class ColliderScript : MonoBehaviour
         }
     }
 
-    void ColliderAssignTest()
-    {
-        Object[] selectedAsset = Selection.GetFiltered(typeof(GameObject), SelectionMode.Assets);
-        foreach (var sel in selectedAsset)
-        {
-            foreach (Transform childTransform in this.gameObject.transform)
-            {
-                foreach (Transform grandChildTransform in childTransform)
-                {
-                    grandChildTransform.gameObject.AddComponent<BoxCollider>();
-                }
-            }
-        }
-    }
+    //void ColliderAssignTest()
+    //{
+    //    bldgs = Selection.GetFiltered(typeof(GameObject), SelectionMode.Assets);
+    //    foreach (var sel in bldgs)
+    //    {
+    //        foreach (Transform childTransform in this.gameObject.transform)
+    //        {
+    //            foreach (Transform grandChildTransform in childTransform)
+    //            {
+    //                grandChildTransform.gameObject.AddComponent<BoxCollider>();
+    //            }
+    //        }
+    //    }
+    //}
 }

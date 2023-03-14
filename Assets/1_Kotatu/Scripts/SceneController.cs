@@ -36,7 +36,7 @@ public class SceneController : MonoBehaviour
     public void MoveToTitle()
     {
         // タイトルシーンへ
-        SceneManager.LoadScene("title");
+        SceneManager.LoadScene("Title");
         Debug.Log("MoveToTitle");
     }
 }

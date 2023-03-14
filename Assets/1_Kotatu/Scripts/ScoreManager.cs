@@ -37,14 +37,14 @@ public class ScoreManager : MonoBehaviour
 
         MatchRateSlider.value = matchRate;
 
-        score += matchRate * 10;
+        score += matchRate * matchRate;
     }
 
     public void ScoreCulc()
     {
         if(timeScore < timeMax)
         {
-            score = timeMax - Mathf.CeilToInt(timeScore);
+            score = timeMax - Mathf.CeilToInt(timeScore) * 50;
         }
         else
         {
