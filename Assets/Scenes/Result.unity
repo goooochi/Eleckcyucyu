@@ -552,8 +552,6 @@ MonoBehaviour:
   matchRate: 0
   MatchRateText: {fileID: 2116102648}
   MatchRateSlider: {fileID: 2065193311}
-  templateMatching: {fileID: 0}
-  timeManager: {fileID: 0}
 --- !u!1 &816241628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1280,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 29
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

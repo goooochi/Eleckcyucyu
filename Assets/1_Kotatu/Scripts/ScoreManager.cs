@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -35,7 +36,8 @@ public class ScoreManager : MonoBehaviour
 
         MatchRateText.text = matchRate.ToString();
 
-        MatchRateSlider.value = matchRate;
+        //MatchRateSlider.value = matchRate;
+        MatchRateSlider.DOValue(matchRate, 1.5f);
 
         score += matchRate * matchRate;
     }
