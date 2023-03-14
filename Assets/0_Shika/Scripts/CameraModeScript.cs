@@ -44,6 +44,7 @@ public class CameraModeScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X))
             {
                 takePicture.OnClick();
+
                 timeManager.ChangePictureBool();
 
                 mapMode = !mapMode;

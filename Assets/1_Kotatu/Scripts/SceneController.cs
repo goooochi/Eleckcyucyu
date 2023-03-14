@@ -28,6 +28,7 @@ public class SceneController : MonoBehaviour
     public void MoveToResult()
     {
         // リザルトシーンへ
+
         SceneManager.LoadScene("Result");
         Debug.Log("MoveToResult");
     }
@@ -35,7 +36,7 @@ public class SceneController : MonoBehaviour
     public void MoveToTitle()
     {
         // タイトルシーンへ
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("title");
         Debug.Log("MoveToTitle");
     }
 }

@@ -74,7 +74,8 @@ public class TemplateMatching : MonoBehaviour
             Debug.Log("Success!");
         }
 
-        //sceneController.MoveToResult();
+        ScoreManager.similarityScore = similarity;
+        sceneController.MoveToResult();
     }
 
     float PerformTemplateMatching(Texture2D searchTex, Texture2D templateTex)

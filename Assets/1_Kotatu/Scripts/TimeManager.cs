@@ -48,6 +48,7 @@ public class TimeManager : MonoBehaviour
 
     public void ChangePictureBool()
     {
+        ScoreManager.timeScore = countTime;
         isPicture = false;
         Debug.Log(isPicture);
     }

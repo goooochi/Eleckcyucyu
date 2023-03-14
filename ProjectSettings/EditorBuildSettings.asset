@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0_Shika/Scenes/Shika_LOD2.unity
     guid: 5f8146b67c9064e97afc571710662cfc
+  - enabled: 1
+    path: Assets/1_Kotatu/Scenes/Result.unity
+    guid: 5296c2483d6ed459a9794c752de46845
   m_configObjects: {}
