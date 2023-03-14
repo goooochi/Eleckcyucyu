@@ -122,7 +122,7 @@ public class TakePicture : MonoBehaviour
         image_Map_Icon.enabled = !image_Map_Icon.enabled;
         image_takeaPictureImage.enabled = true;
 
-        image_takeaPictureImage.enabled = !image_takeaPictureImage.enabled;
+        image_takeaPictureImage.enabled = true;
     }
 
     public void SpriteInit()
