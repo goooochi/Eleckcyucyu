@@ -85,28 +85,12 @@ public class CameraModeScript : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Confined;
         Cursor.lockState = CursorLockMode.Locked;
         float rotateSpeed = 2.0f;
-        //float verticalAngle = 0f;
-
-        //float horizontalRotation = Input.GetAxis("Mouse X") * rotateSpeed;
-        //float verticalRotation = Input.GetAxis("Mouse Y") * rotateSpeed;
-
-        //Player.transform.Rotate(Vector3.up, horizontalRotation);
-
-        //verticalAngle -= verticalRotation;
-        //verticalAngle = Mathf.Clamp(verticalAngle, -89.0f, 89.0f);
-
-        //Vector3 cameraRight = pictureCamera.transform.right;
-        //Vector3 worldUp = Vector3.up;
-
-        //pictureCamera.transform.localRotation = Quaternion.AngleAxis(verticalAngle, cameraRight) * Quaternion.AngleAxis(horizontalRotation, worldUp);
-
-        //float rotateSpeed = 2.0f;
-
+        
         Vector3 angle = new Vector3(Input.GetAxis("Mouse X") * rotateSpeed, Input.GetAxis("Mouse Y") * rotateSpeed, 0);
 
         Player.transform.RotateAround(Player.transform.position, new Vector3(0, 1, 0), angle.x);
 
-        pictureCamera.transform.RotateAround(pictureCamera.transform.position, transform.forward, -angle.y);
+        pictureCamera.transform.RotateAround(pictureCamera.transform.position, Player.transform.right, -angle.y);
 
         //if (Input.GetKeyDown(KeyCode.Escape))
         //{
