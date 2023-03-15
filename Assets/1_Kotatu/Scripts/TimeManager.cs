@@ -37,7 +37,7 @@ public class TimeManager : MonoBehaviour
     {
         if (isPicture)
         {
-            CountTimeText.text = String.Format("{0:00}", countTime);
+            CountTimeText.text = String.Format("{0:00}" + " s", countTime);
             countTime += Time.deltaTime;
         }
         else

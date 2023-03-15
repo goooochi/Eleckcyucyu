@@ -12,6 +12,7 @@ public class TakePicture : MonoBehaviour
     public Image image_Camera_Icon;
     public Image image_Map_Icon;
     public Image target_BackgroundImage;
+    public Image image_checkTemplate_Icon;
     public Button MatchingCheckButton;
     //第一段階
     public Texture2D currentScreenShotTexture;
@@ -114,8 +115,9 @@ public class TakePicture : MonoBehaviour
         Debug.Log("GameStart");
         template_Theme_Image.enabled = false;
         image_template.enabled = false;
-        image_Camera_Icon.gameObject.SetActive(true);
-        image_Map_Icon.gameObject.SetActive(true);
+        image_Camera_Icon.enabled = true;
+        image_Map_Icon.enabled = true;
+        image_checkTemplate_Icon.enabled = true;
         timeManager.isPicture = true;
     }
 
@@ -123,6 +125,7 @@ public class TakePicture : MonoBehaviour
     {
         image_Camera_Icon.enabled = !image_Camera_Icon.enabled;
         image_Map_Icon.enabled = !image_Map_Icon.enabled;
+        image_checkTemplate_Icon.enabled = !image_checkTemplate_Icon.enabled;
         image_takeaPictureImage.enabled = !image_takeaPictureImage.enabled;
         Debug.Log(image_takeaPictureImage.enabled);
     }
@@ -130,6 +133,7 @@ public class TakePicture : MonoBehaviour
     {
         image_Camera_Icon.enabled = !image_Camera_Icon.enabled;
         image_Map_Icon.enabled = !image_Map_Icon.enabled;
+        image_checkTemplate_Icon.enabled = !image_checkTemplate_Icon.enabled;
     }
 
     public void SpriteInit()
@@ -137,8 +141,9 @@ public class TakePicture : MonoBehaviour
         template_Theme_Image.enabled = false;
         image_template.enabled = false;
         image_target.enabled = false;
-        image_Camera_Icon.gameObject.SetActive(false);
-        image_Map_Icon.gameObject.SetActive(false);
+        image_Camera_Icon.enabled = false;
+        image_Map_Icon.enabled = false;
+        image_checkTemplate_Icon.enabled = false;
         target_BackgroundImage.enabled = false;
         MatchingCheckButton.gameObject.SetActive(false);
         image_takeaPictureImage.enabled = false;
@@ -156,7 +161,10 @@ public class TakePicture : MonoBehaviour
 
     public void referenceTemplateChanger()
     {
+        image_checkTemplate_Icon.enabled = !image_checkTemplate_Icon.enabled;
         image_template.enabled = !image_template.enabled;
         template_Theme_Reference_Image.enabled = !template_Theme_Reference_Image.enabled;
+        image_Camera_Icon.enabled = !image_Camera_Icon.enabled;
+        image_Map_Icon.enabled = !image_Map_Icon.enabled;
     }
 }
